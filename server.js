@@ -63,7 +63,10 @@ function findOriginalUrl(short_url, done) {
 }
 
 app.post('/api/shorturl', function (req, res) {
-    const regEx = /http(s?)?:\/\/w{3}\.?\w+\.\S*/;
+    const regEx = new RegExp("^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?");
+
+    console.log(req.body.url);
+    console.log(req.body);
 
     if (!regEx.test(req.body.url)) {
         res.json({
